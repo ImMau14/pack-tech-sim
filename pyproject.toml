@@ -1,0 +1,64 @@
+[project]
+name = "pack-tech-sim"
+version = "0.1.0"
+description = "A discrete event simulation engine for capacity and throughput optimization of high-precision packaging lines"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "sympy>=1.14.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/pack_tech_sim"]
+
+[tool.uv]
+package = true
+
+[dependency-groups]
+dev = [
+    "pyright>=1.1.409",
+    "ruff>=0.15.12",
+]
+
+[tool.ruff]
+line-length = 88
+indent-width = 4
+
+[tool.ruff.lint]
+select = [
+    "E",
+    "W",
+    "F",
+    "I",
+    "UP",
+    "N",
+    "SIM",
+    "RUF",
+]
+ignore = ["E501"]
+
+[tool.ruff.format]
+quote-style = "double"
+skip-magic-trailing-comma = false
+
+[tool.pyright]
+include = ["src"]
+exclude = [
+    "**/node_modules",
+    "**/__pycache__",
+    "**/.venv",
+    "**/tests",
+]
+typeCheckingMode = "basic"
+pythonVersion = "3.12"
+reportUnknownMemberType = false
+
+[project.scripts]
+start = "pack_tech_sim.cli:start"
+lint = "pack_tech_sim.cli:lint"
+fix = "pack_tech_sim.cli:fix"
+check = "pack_tech_sim.cli:check"

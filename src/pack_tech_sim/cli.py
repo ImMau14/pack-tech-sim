@@ -1,0 +1,33 @@
+import subprocess
+import sys
+
+
+def start():
+    """Runs the project"""
+    result = subprocess.run([sys.executable, "-m", "pack_tech_sim.main"])
+    sys.exit(result.returncode)
+
+
+def check():
+    """Type checking with pyright."""
+    try:
+        result = subprocess.run([sys.executable, "-m", "pyright", "."])
+        sys.exit(result.returncode)
+    except FileNotFoundError:
+        print("❌ Error: 'pyright' is not installed. Run 'uv add --dev pyright'")
+        sys.exit(1)
+
+
+def lint():
+    """Linting with ruff."""
+    try:
+        result = subprocess.run(["ruff", "check", "."])
+        sys.exit(result.returncode)
+    except FileNotFoundError:
+        print("❌ Error: 'ruff' is not installed.")
+        sys.exit(1)
+
+
+def fix():
+    """Fix style with ruff."""
+    subprocess.run(["ruff", "check", ".", "--fix"])
