@@ -1,15 +1,17 @@
+from __future__ import annotations
+
 import subprocess
 import sys
 
 
 def start():
-    """Runs the project"""
-    result = subprocess.run([sys.executable, "-m", "pack_tech_sim.main"])
+    result = subprocess.run(
+        [sys.executable, "-m", "pack_tech_sim.main", *sys.argv[1:]]
+    )
     sys.exit(result.returncode)
 
 
 def check():
-    """Type checking with pyright."""
     try:
         result = subprocess.run([sys.executable, "-m", "pyright", "."])
         sys.exit(result.returncode)
@@ -19,7 +21,6 @@ def check():
 
 
 def lint():
-    """Linting with ruff."""
     try:
         result = subprocess.run(["ruff", "check", "."])
         sys.exit(result.returncode)
@@ -29,5 +30,4 @@ def lint():
 
 
 def fix():
-    """Fix style with ruff."""
     subprocess.run(["ruff", "check", ".", "--fix"])

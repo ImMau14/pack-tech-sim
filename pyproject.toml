@@ -5,7 +5,10 @@ description = "A discrete event simulation engine for capacity and throughput op
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-    "sympy>=1.14.0",
+    "prettytable>=3.17.0",
+    "python-dotenv>=1.2.2",
+    "rich>=15.0.0",
+    "simpy>=4.1.1",
 ]
 
 [build-system]
